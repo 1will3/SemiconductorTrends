@@ -1,20 +1,56 @@
-Step 1: Data Collection from arXiv
-Objective: Use arXiv’s API to gather abstracts and metadata for research papers related to
-semiconductors in the chemistry field.
-● Tasks:
-○ Use the arXiv API to query papers with keywords like "semiconductors" and
-"chemistry."
-○ Retrieve the metadata for each paper, including title, abstract, publication date,
-and categories.
-○ Store the collected data in a structured format (e.g., CSV or Pandas DataFrame)
-for analysis.
-Example API Query:
-http://export.arxiv.org/api/query?search_query=all:semiconductors+chem
-istry&start=0&max_results=1000
-●●
-Deliverables:
-○ A dataset containing paper titles, abstracts, authors, categories, and publication
-dates.
-● Related Packages:
-○ Requests, beautifulSoup: For making API calls to arXiv.
-○ pandas: For storing and manipulating the collected data.
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+from time import sleep
+
+def fetch_arxiv_papers(query, start=0, max_results=100):
+    base_url = 'http://export.arxiv.org/api/query?'
+    params = {
+        'search_query': query,
+        'start': start,
+        'max_results': max_results,
+        'sortBy': 'lastUpdatedDate',
+        'sortOrder': 'descending'
+    }
+    
+    response = requests.get(base_url, params=params)
+    return response.content
+
+def parse_arxiv_response(xml_content):
+    soup = BeautifulSoup(xml_content, 'xml')
+    papers = []
+    
+    for entry in soup.find_all('entry'):
+        paper = {}
+        paper['title'] = entry.title.text.strip()
+        paper['abstract'] = entry.summary.text.strip()
+        paper['published'] = entry.published.text.strip()
+        paper['authors'] = [author.name.text for author in entry.find_all('author')]
+        paper['categories'] = [category['term'] for category in entry.find_all('category')]
+        papers.append(paper)
+    
+    return papers
+
+def collect_arxiv_data(query, total_results=1000, batch_size=100):
+    all_papers = []
+    for start in range(0, total_results, batch_size):
+        xml_content = fetch_arxiv_papers(query, start, batch_size)
+        papers = parse_arxiv_response(xml_content)
+        all_papers.extend(papers)
+        print(f"Collected {len(all_papers)} papers so far...")
+        sleep(3)  # Be respectful to the API
+    
+    return pd.DataFrame(all_papers)
+
+# Main execution
+if __name__ == "__main__":
+    query = 'all:semiconductors AND all:chemistry'
+    df = collect_arxiv_data(query)
+    
+    # Save to CSV
+    df.to_csv('arxiv_semiconductors_chemistry.csv', index=False)
+    print(f"Saved {len(df)} papers to arxiv_semiconductors_chemistry.csv")
+
+    # Display first few rows and basic info
+    print(df.head())
+    print(df.info())
