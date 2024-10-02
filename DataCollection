@@ -1,0 +1,20 @@
+Step 1: Data Collection from arXiv
+Objective: Use arXiv’s API to gather abstracts and metadata for research papers related to
+semiconductors in the chemistry field.
+● Tasks:
+○ Use the arXiv API to query papers with keywords like "semiconductors" and
+"chemistry."
+○ Retrieve the metadata for each paper, including title, abstract, publication date,
+and categories.
+○ Store the collected data in a structured format (e.g., CSV or Pandas DataFrame)
+for analysis.
+Example API Query:
+http://export.arxiv.org/api/query?search_query=all:semiconductors+chem
+istry&start=0&max_results=1000
+●●
+Deliverables:
+○ A dataset containing paper titles, abstracts, authors, categories, and publication
+dates.
+● Related Packages:
+○ Requests, beautifulSoup: For making API calls to arXiv.
+○ pandas: For storing and manipulating the collected data.
