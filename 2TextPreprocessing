@@ -1,0 +1,63 @@
+import pandas as pd
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+import re
+import string
+
+# Download necessary NLTK data
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+
+def preprocess_text(text):
+    # Convert to lowercase
+    text = text.lower()
+    
+    # Remove special characters and digits
+    text = re.sub(r'[^a-zA-Z\s]', '', text)
+    
+    # Tokenize
+    tokens = word_tokenize(text)
+    
+    # Remove stopwords
+    stop_words = set(stopwords.words('english'))
+    tokens = [token for token in tokens if token not in stop_words]
+    
+    # Lemmatize
+    lemmatizer = WordNetLemmatizer()
+    tokens = [lemmatizer.lemmatize(token) for token in tokens]
+    
+    return ' '.join(tokens)
+
+def preprocess_dataframe(df):
+    # Apply preprocessing to 'title' and 'abstract' columns
+    df['processed_title'] = df['title'].apply(preprocess_text)
+    df['processed_abstract'] = df['abstract'].apply(preprocess_text)
+    
+    return df
+
+# Main execution
+if __name__ == "__main__":
+    # Load the data from Step 1
+    df = pd.read_csv('arxiv_semiconductors_chemistry.csv')
+    
+    # Preprocess the data
+    df_processed = preprocess_dataframe(df)
+    
+    # Save the preprocessed data
+    df_processed.to_csv('arxiv_semiconductors_chemistry_preprocessed.csv', index=False)
+    
+    # Display sample results
+    print("Sample of preprocessed data:")
+    print(df_processed[['title', 'processed_title', 'abstract', 'processed_abstract']].head())
+    
+    # Display some statistics
+    print("\nAverage token count in processed abstracts:", 
+          df_processed['processed_abstract'].apply(lambda x: len(x.split())).mean())
+    
+    print("\nMost common words in processed abstracts:")
+    all_words = ' '.join(df_processed['processed_abstract']).split()
+    word_freq = pd.Series(all_words).value_counts()
+    print(word_freq.head(10))
