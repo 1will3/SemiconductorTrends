@@ -1,0 +1,86 @@
+import pandas as pd
+import nltk
+from nltk.sentiment import SentimentIntensityAnalyzer
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Download necessary NLTK data
+nltk.download('vader_lexicon')
+
+def perform_sentiment_analysis(text):
+    sia = SentimentIntensityAnalyzer()
+    return sia.polarity_scores(text)
+
+def categorize_sentiment(compound_score):
+    if compound_score >= 0.05:
+        return 'Positive'
+    elif compound_score <= -0.05:
+        return 'Negative'
+    else:
+        return 'Neutral'
+
+def analyze_sentiment_dataframe(df):
+    # Perform sentiment analysis on processed abstracts
+    df['sentiment_scores'] = df['processed_abstract'].apply(perform_sentiment_analysis)
+    
+    # Extract compound score and categorize sentiment
+    df['compound_score'] = df['sentiment_scores'].apply(lambda x: x['compound'])
+    df['sentiment_category'] = df['compound_score'].apply(categorize_sentiment)
+    
+    return df
+
+def plot_sentiment_distribution(df):
+    plt.figure(figsize=(10, 6))
+    sns.countplot(x='sentiment_category', data=df)
+    plt.title('Distribution of Sentiment in arXiv Abstracts')
+    plt.xlabel('Sentiment Category')
+    plt.ylabel('Count')
+    plt.savefig('sentiment_distribution.png')
+    plt.close()
+
+def plot_sentiment_over_time(df):
+    df['year'] = pd.to_datetime(df['published']).dt.year
+    yearly_sentiment = df.groupby('year')['compound_score'].mean().reset_index()
+    
+    plt.figure(figsize=(12, 6))
+    sns.lineplot(x='year', y='compound_score', data=yearly_sentiment)
+    plt.title('Average Sentiment Score Over Time')
+    plt.xlabel('Year')
+    plt.ylabel('Average Compound Sentiment Score')
+    plt.savefig('sentiment_over_time.png')
+    plt.close()
+
+# Main execution
+if __name__ == "__main__":
+    # Load the preprocessed data from Step 2
+    df = pd.read_csv('arxiv_semiconductors_chemistry_preprocessed.csv')
+    
+    # Perform sentiment analysis
+    df_with_sentiment = analyze_sentiment_dataframe(df)
+    
+    # Save the data with sentiment analysis results
+    df_with_sentiment.to_csv('arxiv_semiconductors_chemistry_with_sentiment.csv', index=False)
+    
+    # Display sample results
+    print("Sample of data with sentiment analysis:")
+    print(df_with_sentiment[['processed_abstract', 'compound_score', 'sentiment_category']].head())
+    
+    # Display overall sentiment distribution
+    sentiment_distribution = df_with_sentiment['sentiment_category'].value_counts(normalize=True)
+    print("\nOverall Sentiment Distribution:")
+    print(sentiment_distribution)
+    
+    # Plot sentiment distribution
+    plot_sentiment_distribution(df_with_sentiment)
+    
+    # Plot sentiment over time
+    plot_sentiment_over_time(df_with_sentiment)
+    
+    # Display some statistics
+    print("\nAverage Compound Sentiment Score:", df_with_sentiment['compound_score'].mean())
+    
+    # Display most positive and negative abstracts
+    print("\nMost Positive Abstract:")
+    print(df_with_sentiment.loc[df_with_sentiment['compound_score'].idxmax()]['abstract'])
+    print("\nMost Negative Abstract:")
+    print(df_with_sentiment.loc[df_with_sentiment['compound_score'].idxmin()]['abstract'])
