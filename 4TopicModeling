@@ -1,0 +1,97 @@
+import pandas as pd
+import numpy as np
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.decomposition import LatentDirichletAllocation
+import matplotlib.pyplot as plt
+import seaborn as sns
+from collections import Counter
+
+def prepare_data_for_lda(df, text_column):
+    vectorizer = CountVectorizer(max_df=0.95, min_df=2, stop_words='english')
+    doc_term_matrix = vectorizer.fit_transform(df[text_column])
+    return vectorizer, doc_term_matrix
+
+def perform_lda(doc_term_matrix, num_topics=5):
+    lda_model = LatentDirichletAllocation(n_components=num_topics, random_state=42)
+    lda_output = lda_model.fit_transform(doc_term_matrix)
+    return lda_model, lda_output
+
+def print_topics(model, feature_names, num_top_words=10):
+    for topic_idx, topic in enumerate(model.components_):
+        top_words = [feature_names[i] for i in topic.argsort()[:-num_top_words - 1:-1]]
+        print(f"Topic {topic_idx + 1}: {', '.join(top_words)}")
+
+def assign_topics(lda_output):
+    return lda_output.argmax(axis=1)
+
+def plot_topic_distribution(df):
+    topic_counts = Counter(df['assigned_topic'])
+    topics, counts = zip(*sorted(topic_counts.items()))
+    
+    plt.figure(figsize=(12, 6))
+    sns.barplot(x=list(topics), y=list(counts))
+    plt.title('Distribution of Topics')
+    plt.xlabel('Topic')
+    plt.ylabel('Number of Documents')
+    plt.savefig('topic_distribution.png')
+    plt.close()
+
+def plot_topics_over_time(df):
+    df['year'] = pd.to_datetime(df['published']).dt.year
+    topic_year_counts = df.groupby(['year', 'assigned_topic']).size().unstack(fill_value=0)
+    topic_year_proportions = topic_year_counts.div(topic_year_counts.sum(axis=1), axis=0)
+    
+    plt.figure(figsize=(12, 6))
+    topic_year_proportions.plot(kind='area', stacked=True)
+    plt.title('Topic Proportions Over Time')
+    plt.xlabel('Year')
+    plt.ylabel('Proportion of Topics')
+    plt.legend(title='Topic', bbox_to_anchor=(1.05, 1), loc='upper left')
+    plt.tight_layout()
+    plt.savefig('topics_over_time.png')
+    plt.close()
+
+# Main execution
+if __name__ == "__main__":
+    # Load the data with sentiment analysis from Step 3
+    df = pd.read_csv('arxiv_semiconductors_chemistry_with_sentiment.csv')
+    
+    # Prepare data for LDA
+    vectorizer, doc_term_matrix = prepare_data_for_lda(df, 'processed_abstract')
+    
+    # Perform LDA
+    num_topics = 5  # You can adjust this number
+    lda_model, lda_output = perform_lda(doc_term_matrix, num_topics)
+    
+    # Print topics
+    print("Top words for each topic:")
+    print_topics(lda_model, vectorizer.get_feature_names_out())
+    
+    # Assign topics to documents
+    df['assigned_topic'] = assign_topics(lda_output)
+    
+    # Plot topic distribution
+    plot_topic_distribution(df)
+    
+    # Plot topics over time
+    plot_topics_over_time(df)
+    
+    # Save the data with assigned topics
+    df.to_csv('arxiv_semiconductors_chemistry_with_topics.csv', index=False)
+    
+    # Display sample results
+    print("\nSample of documents with assigned topics:")
+    print(df[['title', 'assigned_topic']].head(10))
+    
+    # Analyze correlation between topics and sentiment
+    topic_sentiment_corr = df.groupby('assigned_topic')['compound_score'].mean()
+    print("\nAverage sentiment score for each topic:")
+    print(topic_sentiment_corr)
+    
+    # Find most representative document for each topic
+    for topic in range(num_topics):
+        topic_docs = df[df['assigned_topic'] == topic]
+        most_representative = topic_docs.iloc[lda_output[topic_docs.index, topic].argmax()]
+        print(f"\nMost representative document for Topic {topic + 1}:")
+        print(f"Title: {most_representative['title']}")
+        print(f"Abstract: {most_representative['abstract'][:200]}...")  # Print first 200 characters
