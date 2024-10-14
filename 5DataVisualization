@@ -1,0 +1,131 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from wordcloud import WordCloud
+import numpy as np
+from scipy.stats import zscore
+
+# Set style for all plots
+plt.style.use('seaborn')
+sns.set_palette("deep")
+
+def load_data(filename):
+    return pd.read_csv(filename)
+
+def plot_sentiment_distribution(df):
+    plt.figure(figsize=(10, 6))
+    sns.countplot(x='sentiment_category', data=df)
+    plt.title('Distribution of Sentiment in arXiv Abstracts')
+    plt.xlabel('Sentiment Category')
+    plt.ylabel('Count')
+    plt.savefig('sentiment_distribution.png')
+    plt.close()
+
+def plot_sentiment_over_time(df):
+    df['year'] = pd.to_datetime(df['published']).dt.year
+    yearly_sentiment = df.groupby('year')['compound_score'].mean().reset_index()
+    
+    plt.figure(figsize=(12, 6))
+    sns.lineplot(x='year', y='compound_score', data=yearly_sentiment)
+    plt.title('Average Sentiment Score Over Time')
+    plt.xlabel('Year')
+    plt.ylabel('Average Compound Sentiment Score')
+    plt.savefig('sentiment_over_time.png')
+    plt.close()
+
+def create_wordcloud(df, column):
+    text = ' '.join(df[column])
+    wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
+    
+    plt.figure(figsize=(10, 5))
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis('off')
+    plt.title(f'Word Cloud of {column.capitalize()}')
+    plt.savefig(f'{column}_wordcloud.png')
+    plt.close()
+
+def plot_topic_distribution(df):
+    plt.figure(figsize=(12, 6))
+    sns.countplot(x='assigned_topic', data=df)
+    plt.title('Distribution of Topics')
+    plt.xlabel('Topic')
+    plt.ylabel('Number of Documents')
+    plt.savefig('topic_distribution.png')
+    plt.close()
+
+def plot_topics_over_time(df):
+    df['year'] = pd.to_datetime(df['published']).dt.year
+    topic_year_counts = df.groupby(['year', 'assigned_topic']).size().unstack(fill_value=0)
+    topic_year_proportions = topic_year_counts.div(topic_year_counts.sum(axis=1), axis=0)
+    
+    plt.figure(figsize=(12, 6))
+    topic_year_proportions.plot(kind='area', stacked=True)
+    plt.title('Topic Proportions Over Time')
+    plt.xlabel('Year')
+    plt.ylabel('Proportion of Topics')
+    plt.legend(title='Topic', bbox_to_anchor=(1.05, 1), loc='upper left')
+    plt.tight_layout()
+    plt.savefig('topics_over_time.png')
+    plt.close()
+
+def plot_topic_sentiment_correlation(df):
+    topic_sentiment = df.groupby('assigned_topic')['compound_score'].mean().reset_index()
+    
+    plt.figure(figsize=(10, 6))
+    sns.barplot(x='assigned_topic', y='compound_score', data=topic_sentiment)
+    plt.title('Average Sentiment Score by Topic')
+    plt.xlabel('Topic')
+    plt.ylabel('Average Compound Sentiment Score')
+    plt.savefig('topic_sentiment_correlation.png')
+    plt.close()
+
+def plot_publication_trend(df):
+    df['year'] = pd.to_datetime(df['published']).dt.year
+    yearly_counts = df['year'].value_counts().sort_index()
+    
+    plt.figure(figsize=(12, 6))
+    sns.lineplot(x=yearly_counts.index, y=yearly_counts.values)
+    plt.title('Number of Publications Over Time')
+    plt.xlabel('Year')
+    plt.ylabel('Number of Publications')
+    plt.savefig('publication_trend.png')
+    plt.close()
+
+def plot_author_collaboration_network(df):
+    from networkx import Graph, spring_layout, draw_networkx_nodes, draw_networkx_edges
+    
+    G = Graph()
+    for authors in df['authors']:
+        author_list = eval(authors)  # Convert string representation of list to actual list
+        for i, author1 in enumerate(author_list):
+            for author2 in author_list[i+1:]:
+                if G.has_edge(author1, author2):
+                    G[author1][author2]['weight'] += 1
+                else:
+                    G.add_edge(author1, author2, weight=1)
+    
+    plt.figure(figsize=(20, 20))
+    pos = spring_layout(G)
+    draw_networkx_nodes(G, pos, node_size=10)
+    draw_networkx_edges(G, pos, alpha=0.1)
+    plt.title('Author Collaboration Network')
+    plt.axis('off')
+    plt.savefig('author_collaboration_network.png')
+    plt.close()
+
+# Main execution
+if __name__ == "__main__":
+    # Load the data
+    df = load_data('arxiv_semiconductors_chemistry_with_topics.csv')
+    
+    # Create visualizations
+    plot_sentiment_distribution(df)
+    plot_sentiment_over_time(df)
+    create_wordcloud(df, 'processed_abstract')
+    plot_topic_distribution(df)
+    plot_topics_over_time(df)
+    plot_topic_sentiment_correlation(df)
+    plot_publication_trend(df)
+    plot_author_collaboration_network(df)
+    
+    print("All visualizations have been created and saved as PNG files.")
