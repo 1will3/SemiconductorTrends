@@ -32,9 +32,10 @@ clouds, and topic models.
 # UPDATE 10/23
 At this point, the project is successful at:
 - utilizing ArXiv's API to gather research titles and abstracts
-- identify most common keywords
-- ascribe a rough sentiment score to each paper (followed by an overall positive or negative classification)
-- Create 5 general topics based on a combination of keywords, and sort the papers into the percieved topic, also ranking top papers representative for each topic model
+- Use BeautifulSoup4 and Pandas packages to parse the content, create a DataFrame, and save to a .csv file
+- identify most common keywords using NLTK package (tokenize, stopwords, lemmatizer), reading from DataFrame
+- ascribe a rough sentiment score to each paper (followed by an overall positive or negative classification) using NLTK SentimentIntesityAnalyzer, Seaborn
+- Create 5 general topics based on a combination of keywords, and sort the papers into the percieved topic, also ranking top papers representative for each topic model (Scikit-Learn (LatentDirichletAllocation, CoutVectorizer), numpy, seaborn)
 - Create visualizations based in matplotlib and seaborn libraries: keyword-word cloud, bar and line graphs (sentiment distribution and score over time, overall sentiments over time, topic distribution and proportion over time, publications over time)
 
 This initial draft documents will be placed in a folder for version control. (See: )
