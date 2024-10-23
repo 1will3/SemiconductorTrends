@@ -41,3 +41,11 @@ At this point, the project is successful at:
 This initial draft documents will be placed in a folder for version control. (See: Version1 )
 Now, I will improve this project as it desperately needs, to more accurately identify the specific developments and trends rather than basic keywords, adjust sentiment and topic modeling approach, and produce more accurate visualizations to represent valuable information regarding developments.
 
+VERSION 1.1
+For this update, I:
+- removed the 'chemistry' keyword, seeking semiconductor results wholly outside of chemistry related searches. This increased the papers roughly 400% (1000 total count)
+- Updated the text preprocessing using Bigrams and Trigrams (top technical phrases, most frequent technical terms
+- We can now see an expected difference in the visualizations for sentiment, publications, and distributions over time
+- I am tracking these updates simply to keep track of changes
+
+
