@@ -1,10 +1,10 @@
 # SemiconductorTrends
-This project aims to analyze scientific abstracts on semiconductors in the chemistry field from arXiv to uncover trends and sentiments in research progress. 
+This project aims to analyze scientific abstracts on semiconductors from arXiv to uncover trends and sentiments in research progress.  [https://arxiv.org/]
 
-I used arXiv’s API to
-collect paper abstracts, perform text preprocessing, apply sentiment analysis to understand
+I used arXiv’s API to collect paper abstracts, perform text preprocessing, apply sentiment analysis to understand
 the overall tone of research, and use topic modeling to identify key research trends over time.
-This provides insights into how research on semiconductors in chemistry is evolving.
+
+This provides insights into how research on semiconductors is evolving.
 
 Objectives:
 1. Data Collection from arXiv:
@@ -38,7 +38,7 @@ At this point, the project is successful at:
 - Create 5 general topics based on a combination of keywords, and sort the papers into the percieved topic, also ranking top papers representative for each topic model (Scikit-Learn (LatentDirichletAllocation, CoutVectorizer), numpy, seaborn)
 - Create visualizations based in matplotlib and seaborn libraries: keyword-word cloud, bar and line graphs (sentiment distribution and score over time, overall sentiments over time, topic distribution and proportion over time, publications over time)
 
-This initial draft documents will be placed in a folder for version control. (See: Version1 )
+This initial draft documents will be placed in a folder for version control. (See: Version1)
 Now, I will improve this project as it desperately needs, to more accurately identify the specific developments and trends rather than basic keywords, adjust sentiment and topic modeling approach, and produce more accurate visualizations to represent valuable information regarding developments.
 
 VERSION 1.1
@@ -47,5 +47,18 @@ For this update, I:
 - Updated the text preprocessing using Bigrams and Trigrams (top technical phrases, most frequent technical terms
 - We can now see an expected difference in the visualizations for sentiment, publications, and distributions over time
 - I am tracking these updates simply to keep track of changes
+
+VERSION 1.2
+For this update, I:
+- Improved Sentiment analysis by migrating from a basic NLTK Vader package to specified scientific terminology used to score the sentiment specifically using research vernacular
+- 
+
+# VERSION 2
+With the trends more accurately represented, I will now add more accuracy and comparison to the project in the following areas: 
+- 1. Extend the Dataset: Collect data from other sources to compare results.
+- 2. Improve Sentiment Analysis: Fine-tune sentiment analysis models or train your own
+models on domain-specific text for better accuracy.
+- 3. Expand NLP Techniques: Use advanced NLP techniques like BERT or GPT models for
+more nuanced text understanding and classification.
 
 
