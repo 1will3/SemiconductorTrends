@@ -60,7 +60,7 @@ We can now see an expected difference in the visualizations for sentiment, publi
     - Practice using PowerBI
     - Create a wholistic dashboard accessible for technical/non-technical users
 - Extend the Dataset: Collect data from other sources to compare results.
-    - I will include new research sites:  Zenodo [https://zenodo.org/]; Google Scholar [https://scholar.google.com/]
+    - I will include new research sites:  Zenodo [https://zenodo.org/]; Google Scholar [https://scholar.google.com/]; SSRN [https://www.ssrn.com/index.cfm/en/]
     - Compare differences in results
     - common research themes
     - Trends over time
