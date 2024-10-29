@@ -62,3 +62,9 @@ models on domain-specific text for better accuracy.
 more nuanced text understanding and classification.
 
 
+# VERSION 3 
+- SQL Database
+- PowerBI
+- Compare other sites
+
+
