@@ -41,31 +41,22 @@ At this point, the project is successful at:
 This initial draft documents will be placed in a folder for version control. (See: Version1)
 Now, I will improve this project as it desperately needs, to more accurately identify the specific developments and trends rather than basic keywords, adjust sentiment and topic modeling approach, and produce more accurate visualizations to represent valuable information regarding developments.
 
-VERSION 1.1
-For this update, I:
-- removed the 'chemistry' keyword, seeking semiconductor results wholly outside of chemistry related searches. This increased the papers roughly 400% (1000 total count)
-- Updated the text preprocessing using Bigrams and Trigrams (top technical phrases, most frequent technical terms
-- We can now see an expected difference in the visualizations for sentiment, publications, and distributions over time
-- I am tracking these updates simply to keep track of changes
-
-VERSION 1.2
-For this update, I:
-- Improved Sentiment analysis by migrating from a basic NLTK Vader package to specified scientific terminology used to score the sentiment specifically using research vernacular
-- 
 
 # VERSION 2
 With the trends more accurately represented, I will now add more accuracy and comparison to the project in the following areas: 
-- 1. Extend the Dataset: Collect data from other sources to compare results.
-- 2. Improve Sentiment Analysis: Fine-tune sentiment analysis models or train your own
-models on domain-specific text for better accuracy.
-- 3. Expand NLP Techniques: Use advanced NLP techniques like BERT or GPT models for
-more nuanced text understanding and classification.
+- removed the 'chemistry' keyword, seeking semiconductor results wholly outside of chemistry related searches. This increased the papers roughly 400% (1000 total count) per run
+- Updated the text preprocessing using Bigrams and Trigrams (top technical phrases, most frequent technical terms)
+- Import common research keywords to avoid collection of irrelevant tokens
+
+We can now see an expected difference in the visualizations for sentiment, publications, and distributions over time
+
+
 
 
 # VERSION 3 
-- SQL Database
-- PowerBI
-- Compare other sites
+- Incorporate SQL Database
+- PowerBI visualization migration
+- Extend the Dataset: Collect data from other sources to compare results.
 - End project, avoid scope creep
 
 
