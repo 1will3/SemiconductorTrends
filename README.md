@@ -66,5 +66,6 @@ more nuanced text understanding and classification.
 - SQL Database
 - PowerBI
 - Compare other sites
+- End project, avoid scope creep
 
 
