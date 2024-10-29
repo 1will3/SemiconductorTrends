@@ -43,7 +43,7 @@ Now, I will improve this project as it desperately needs, to more accurately ide
 
 
 # VERSION 2
-With the trends more accurately represented, I will now add more accuracy and comparison to the project in the following areas: 
+I will now add more accuracy and comparison to the project in the following areas: 
 - removed the 'chemistry' keyword, seeking semiconductor results wholly outside of chemistry related searches. This increased the papers roughly 400% (1000 total count) per run
 - Updated the text preprocessing using Bigrams and Trigrams (top technical phrases, most frequent technical terms)
 - Import common research keywords to avoid collection of irrelevant tokens
@@ -51,12 +51,19 @@ With the trends more accurately represented, I will now add more accuracy and co
 We can now see an expected difference in the visualizations for sentiment, publications, and distributions over time
 
 
-
-
 # VERSION 3 
 - Incorporate SQL Database
+    - This will be used to save the runs
+    - See any changes over each run
+    - and be used to compare data sources
 - PowerBI visualization migration
+    - Practice using PowerBI
+    - Create a wholistic dashboard accessible for technical/non-technical users
 - Extend the Dataset: Collect data from other sources to compare results.
-- End project, avoid scope creep
+    - I will include new research sites:  Zenodo [https://zenodo.org/]; Google Scholar [https://scholar.google.com/]
+    - Compare differences in results
+    - common research themes
+    - Trends over time
+- End project for now, avoid scope creep
 
 
