@@ -12,24 +12,28 @@ Use arXiv API to collect abstracts of papers related to semiconductors in the
 chemistry field.
 Organize the dataset to include metadata like title, abstract, author(s), publication
 date, and categories.
+
 2. Text Preprocessing:
 Clean and preprocess the text by removing unnecessary content (e.g., special
 characters, citations).
 Tokenize, lemmatize, and remove stop words to prepare the text for analysis.
+
 3. Sentiment Analysis:
 Analyze the sentiment of paper abstracts to determine the general sentiment
 (positive, negative, or neutral) regarding the developments in the field.
+
 4. Topic Modeling and Trend Discovery:
 Use NLP techniques like Latent Dirichlet Allocation (LDA) to uncover key
 research topics.
 Analyze how the focus of research has shifted over time using time-series
 analysis of the topics.
+
 5. Data Visualization:
 Visualize sentiment trends over time and key research areas using graphs, word
 clouds, and topic models.
 
 
-# UPDATE 10/23
+# VERSION 1
 At this point, the project is successful at:
 - utilizing ArXiv's API to gather research titles and abstracts
 - Use BeautifulSoup4 and Pandas packages to parse the content, create a DataFrame, and save to a .csv file
@@ -52,6 +56,14 @@ We can now see an expected difference in the visualizations for sentiment, publi
 
 
 # VERSION 3 
+- Multiple Runs
+    - It will be helpful to record the results from 5 runs, and use this variance in data to find a more accurate description of general trends and topics.
+    - No variance was found over the 5 runs, indicating reproducability within the results
+- Extend the Dataset: Collect data from other sources to compare results.
+    - I will include new research sites:  Zenodo [https://zenodo.org/]; MDPI [https://www.mdpi.com/search?q=semiconductor]
+    - Compare differences in results
+    - common research themes
+    - Trends over time
 - Incorporate SQL Database
     - This will be used to save the runs
     - See any changes over each run
@@ -59,11 +71,7 @@ We can now see an expected difference in the visualizations for sentiment, publi
 - PowerBI visualization migration
     - Practice using PowerBI
     - Create a wholistic dashboard accessible for technical/non-technical users
-- Extend the Dataset: Collect data from other sources to compare results.
-    - I will include new research sites:  Zenodo [https://zenodo.org/]; Google Scholar [https://scholar.google.com/]; SSRN [https://www.ssrn.com/index.cfm/en/]
-    - Compare differences in results
-    - common research themes
-    - Trends over time
+
 - End project for now, avoid scope creep
 
 
