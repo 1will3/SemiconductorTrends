@@ -42,7 +42,6 @@ At this point, the project is successful at:
 - Create 5 general topics based on a combination of keywords, and sort the papers into the percieved topic, also ranking top papers representative for each topic model (Scikit-Learn (LatentDirichletAllocation, CoutVectorizer), numpy, seaborn)
 - Create visualizations based in matplotlib and seaborn libraries: keyword-word cloud, bar and line graphs (sentiment distribution and score over time, overall sentiments over time, topic distribution and proportion over time, publications over time)
 
-This initial draft documents will be placed in a folder for version control. (See: Version1)
 Now, I will improve this project as it desperately needs, to more accurately identify the specific developments and trends rather than basic keywords, adjust sentiment and topic modeling approach, and produce more accurate visualizations to represent valuable information regarding developments.
 
 
@@ -56,6 +55,68 @@ We can now see an expected difference in the visualizations for sentiment, publi
 
 
 # VERSION 3 
+Each module was enhanced to work together more effectively, with better error handling and more sophisticated analysis techniques.
+
+Module 1: Data Collection
+- Improved how the program collects research papers from arXiv, making it more reliable and able to handle errors better. We also removed some restrictions to get a wider range of relevant papers.
+
+Module 2: Text Preprocessing
+- Enhanced how the program understands scientific text by teaching it to recognize important technical terms and filter out common words that don't add meaning. We also improved how it handles mathematical formulas and chemical names.
+    Technical Changes:
+
+    - Added TECHNICAL_STOPWORDS set with domain-specific terms
+    -  Implemented POS (Part of Speech) tagging
+    -  Added BigramCollocationFinder and TrigramCollocationFinder
+    -  Enhanced regex patterns for cleaning mathematical notation
+    -  Added technical phrase extraction with PMI scoring
+    -  Improved handling of hyphenated terms and chemical formulas
+    -  Added WordNetLemmatizer for term standardization
+
+Module 3: Sentiment Analysis
+- Updated the system to understand the tone of scientific writing, which is very different from regular text. The system now recognizes technical confidence, research progress, and uncertainty in scientific papers.
+    Technical Changes:
+
+    - Added SCIENTIFIC_INDICATORS dictionary with:
+        Positive indicators (e.g., 'breakthrough', 'efficient')
+        Negative indicators (e.g., 'limitation', 'drawback')
+        Progress markers (e.g., 'demonstrate', 'develop')
+        Uncertainty markers (e.g., 'may', 'possible')
+    
+    - Updated custom ScientificSentimentAnalyzer class
+        Changed weighting and parameters for: technical_confidence scoring, result_strength analysis, citation_impact measurement
+  
+
+Module 4: Topic Modeling
+- Improved how the program groups similar research papers together and identifies main research themes. The program now better understands the relationships between papers and can track how research topics change over time.
+    Technical Changes:
+
+    - Enhanced LDA parameters:
+        Changed batch_size to 128
+        Added n_jobs=-1 for parallel processing
+        Added learning_method='online'
+        Added evaluate_every=5
+
+    - Implemented auto_name_topic function
+        Added temporal analysis functions
+
+    - Enhanced vectorization parameters:
+        Changed min_df from 2 to 3
+        Added ngram_range=(1,3)
+        Modified token_pattern for compound terms
+
+
+Module 5: Data Visualization
+- Cleaned up the graphing of results. The visualizations now show more clear patterns in research trends and sentiment over time.
+    Technical Changes:
+
+    - Added SENTIMENT_COLORS dictionary
+    - Added percentage annotations to plots
+    - Enhanced figure sizing and formatting
+    - Improved color schemes and legend handling
+
+
+
+# Future Areas of Improvement 
 - Multiple Runs
     - It will be helpful to record the results from 5 runs, and use this variance in data to find a more accurate description of general trends and topics.
     - No variance was found over the 5 runs, indicating reproducability within the results
