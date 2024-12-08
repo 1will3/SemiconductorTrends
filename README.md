@@ -116,19 +116,23 @@ Module 5: Data Visualization
 
 
 
-# Future Areas of Improvement 
+# Considerations: Future Areas of Improvement 
+- Increase / Decrease # of papers collected for analysis
+- Stopword Library: Determine the optimal list of stop words to get more specific topics, while also avoiding overfitting the results with too high of a stopword list.
+- Weighting: Determine both statistically and from previous research sources, what the optimal weighting system should be, considering both sentiment weighting of words, and the parameters in Topic Modeling that determine the weight of each dimension to how an accurate topic is grouped
+- Topic Modeling: Like above, topic modeling followed an LDA analysis, customized for research paper specific criteria. These are somewhat arbitrary and could be improved by further statiscital analysis.
+- Topic Naming: Topic naming could be more simplified, or more complex, based on the chosen ideal for how specific or broad a topic area is. This matters based on the desired metrics for the type of person/team seeking the results (academic, research, corporate, financial, etc.)
+- Graphing: Of course, analysis through visualizations can constantly be improved based on what information and conclusions are desired.
+  
 - Multiple Runs
-    - It will be helpful to record the results from 5 runs, and use this variance in data to find a more accurate description of general trends and topics.
-    - No variance was found over the 5 runs, indicating reproducability within the results
+    - It will be helpful to record the results from multiple runs, and use this variance in data to find a more accurate description of general trends and topics.
 - Extend the Dataset: Collect data from other sources to compare results.
-    - I will include new research sites:  Zenodo [https://zenodo.org/]; MDPI [https://www.mdpi.com/search?q=semiconductor]
+    - Include new research sites (ex: Zenodo [https://zenodo.org/]; MDPI [https://www.mdpi.com/search?q=semiconductor])
     - Compare differences in results
-    - common research themes
-    - Trends over time
 - Incorporate SQL Database
-    - This will be used to save the runs
+    - This could be used to save the runs
     - See any changes over each run
-    - and be used to compare data sources
+    - Use to compare data sources
 - PowerBI visualization migration
     - Practice using PowerBI
     - Create a wholistic dashboard accessible for technical/non-technical users
