@@ -125,7 +125,7 @@ Module 5: Data Visualization
 - Topic Naming: Topic naming could be more simplified, or more complex, based on the chosen ideal for how specific or broad a topic area is. This matters based on the desired metrics for the type of person/team seeking the results (academic, research, corporate, financial, etc.)
 - Graphing: Of course, analysis through visualizations can constantly be improved based on what information and conclusions are desired.
   
--Analysis of other keywords (in place of semiconductors) to understand the flexibility of the model
+- Analysis of other keywords (in place of semiconductors) to understand the flexibility of the model
 - Multiple Runs
     - It will be helpful to record the results from multiple runs, and use this variance in data to find a more accurate description of general trends and topics.
 - Extend the Dataset: Collect data from other sources to compare results.
