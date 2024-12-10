@@ -3,10 +3,9 @@ This project aims to analyze scientific abstracts on semiconductors from arXiv t
 
 *** See Semiconductor Trends Research Paper in this repository for the full explanation, research analysis, and results***
 
-I used arXiv’s API to collect paper abstracts, perform text preprocessing, apply sentiment analysis to understand
-the overall tone of research, and use topic modeling to identify key research trends over time.
+I used arXiv’s API to collect paper abstracts, perform text preprocessing, apply sentiment analysis, and use topic modeling to identify key research trends over time.
 
-This provides insights into how research on semiconductors is evolving.
+Ideally this can be used as a tool to provide insights into where development on semiconductors is evolving.
 
 Objectives:
 1. Data Collection from arXiv:
@@ -42,7 +41,7 @@ At this point, the project is successful at:
 - identify most common keywords using NLTK package (tokenize, stopwords, lemmatizer), reading from DataFrame
 - ascribe a rough sentiment score to each paper (followed by an overall positive or negative classification) using NLTK SentimentIntesityAnalyzer, Seaborn
 - Create 5 general topics based on a combination of keywords, and sort the papers into the percieved topic, also ranking top papers representative for each topic model (Scikit-Learn (LatentDirichletAllocation, CoutVectorizer), numpy, seaborn)
-- Create visualizations based in matplotlib and seaborn libraries: keyword-word cloud, bar and line graphs (sentiment distribution and score over time, overall sentiments over time, topic distribution and proportion over time, publications over time)
+- Create visualizations based in matplotlib and seaborn libraries: bar and line graphs (sentiment distribution and score over time, overall sentiments over time, topic distribution and proportion over time, publications over time)
 
 Now, I will improve this project as it desperately needs, to more accurately identify the specific developments and trends rather than basic keywords, adjust sentiment and topic modeling approach, and produce more accurate visualizations to represent valuable information regarding developments.
 
