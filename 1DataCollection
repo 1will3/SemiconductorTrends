@@ -44,7 +44,7 @@ def collect_arxiv_data(query, total_results=1000, batch_size=100):
 
 # Main execution
 if __name__ == "__main__":
-    query = 'all:semiconductor'
+    query = 'all:benzene'
     df = collect_arxiv_data(query)
     
     # Save to CSV
