@@ -118,6 +118,7 @@ Module 5: Data Visualization
 
 
 # Considerations: Future Areas of Improvement 
+- Backwards Validation: Find the trends beforehand via a more statistical approach, determine if the model lines up to the predetermined trends
 - Increase / Decrease # of papers collected for analysis
 - Stopword Library: Determine the optimal list of stop words to get more specific topics, while also avoiding overfitting the results with too high of a stopword list.
 - Weighting: Determine both statistically and from previous research sources, what the optimal weighting system should be, considering both sentiment weighting of words, and the parameters in Topic Modeling that determine the weight of each dimension to how an accurate topic is grouped
@@ -125,7 +126,6 @@ Module 5: Data Visualization
 - Topic Naming: Topic naming could be more simplified, or more complex, based on the chosen ideal for how specific or broad a topic area is. This matters based on the desired metrics for the type of person/team seeking the results (academic, research, corporate, financial, etc.)
 - Graphing: Of course, analysis through visualizations can constantly be improved based on what information and conclusions are desired.
   
-- Analysis of other keywords (in place of semiconductors) to understand the flexibility of the model
 - Multiple Runs
     - It will be helpful to record the results from multiple runs, and use this variance in data to find a more accurate description of general trends and topics.
 - Extend the Dataset: Collect data from other sources to compare results.
@@ -139,6 +139,9 @@ Module 5: Data Visualization
     - Practice using PowerBI
     - Create a wholistic dashboard accessible for technical/non-technical users
 
-- End project for now, avoid scope creep
+
+- Analysis of other keywords (in place of semiconductors) to understand the flexibility of the model
+  
+---> End project for now, avoid scope creep
 
 
