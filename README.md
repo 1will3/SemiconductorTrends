@@ -1,5 +1,6 @@
 # SemiconductorTrends
 * See PAPER in this repository for the research paper, analysis, and results
+* See codeV3 for all code modules
 * See Installation for installation instructions
 * See Process Flow Diagrams (PFD) for module and overall process flow more in depth
 
