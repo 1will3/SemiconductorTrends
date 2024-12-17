@@ -1,5 +1,5 @@
 # SemiconductorTrends
-* See PAPER in this repository for the full explanation, research analysis, and results
+* See PAPER in this repository for the research paper, analysis, and results
 * See Installation for installation instructions
 * See Process Flow Diagrams (PFD) for module and overall process flow more in depth
 
