@@ -1,1 +1,37 @@
+Installation Guide - Semiconductor Research Analysis Tool
+Requirements
 
+Python 3.8 or higher
+VS Code or similar code editor
+Required packages:
+Copyrequests
+beautifulsoup4
+pandas
+nltk
+scikit-learn
+matplotlib
+seaborn
+gensim
+numpy
+
+
+Setup Steps
+
+Install Python 3.8+ and VS Code
+Install required packages using pip:
+Copypip install requests beautifulsoup4 pandas nltk scikit-learn matplotlib seaborn gensim numpy
+
+Put all these files in one directory:
+
+1DataCollectionV3.py
+2TextPreprocessingV3.py
+3SentimentAnalysisV3.py
+4TopicModelingV3.py
+5DataVisualizationV3.py
+mainV3.py
+
+
+Run mainV3.py
+
+Output
+The program will create CSV files and visualizations in your project directory.
