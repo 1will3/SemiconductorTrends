@@ -1,7 +1,7 @@
 # SemiconductorTrends
 * See PAPER in this repository for the full explanation, research analysis, and results
 * See Installation for installation instructions
-* See Process Flow Diagrams (PFD) for each module and overall process flow more in depth
+* See Process Flow Diagrams (PFD) for module and overall process flow more in depth
 
 This project aims to analyze scientific abstracts on semiconductors from arXiv to uncover trends and sentiments in research progress.  [https://arxiv.org/]
 
