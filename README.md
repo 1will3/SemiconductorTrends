@@ -1,11 +1,11 @@
 # SemiconductorTrends
 This project aims to analyze scientific abstracts on semiconductors from arXiv to uncover trends and sentiments in research progress.  [https://arxiv.org/]
 
+I used arXiv’s API to collect paper abstracts, perform text preprocessing, apply sentiment analysis, and use topic modeling to identify key research trends over time.
+
 * See PAPER in this repository for the full explanation, research analysis, and results
 * See Installation for installation instructions
 * See Process Flow Diagrams (PFD) for each module and overall process flow more in depth
-
-I used arXiv’s API to collect paper abstracts, perform text preprocessing, apply sentiment analysis, and use topic modeling to identify key research trends over time.
 
 Ideally this can be used as a tool to provide insights into where development on semiconductors is evolving.
 
